@@ -9,14 +9,12 @@ const ListProjectsView = props => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.51:8080/articles')
+    fetch('https://beprojectback.herokuapp.com/projects')
       .then(response => response.json())
       .then(json => setData(json))
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, []);
-
-  console.log(data);
 
   const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity

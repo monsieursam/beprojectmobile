@@ -7,7 +7,7 @@ const ProjectView = props => {
   const {params} = route;
   const {item} = params;
 
-  const data = {idUser: 3, idProject: item.id};
+  const data = {name: 'A project name'};
 
   return (
     <View style={{marginTop: 50}}>
@@ -20,7 +20,7 @@ const ProjectView = props => {
 
       <TouchableOpacity
         onPress={() => {
-          fetch('http://192.168.1.51:8080/commandes', {
+          fetch('https://beprojectback.herokuapp.com/projects', {
             method: 'POST',
             headers: {
               'Access-Control-Allow-Origin': '*',
@@ -30,13 +30,13 @@ const ProjectView = props => {
           })
             .then(response => response.json())
             .then(
-              navigation.navigate('Commande', {
+              navigation.navigate('AddProject', {
                 item,
               }),
             );
         }}>
         <View>
-          <Text>Commander</Text>
+          <Text>Like</Text>
         </View>
       </TouchableOpacity>
     </View>
