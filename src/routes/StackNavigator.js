@@ -1,17 +1,17 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ListArticlesView, ArticleView, CommandeView} from 'views';
-// import ListArticlesView from 'views/ListArticlesView';
+import {ListProjectsView, ProjectView, AddProjectView} from 'views';
+// import ListProjectsView from 'views/ListProjectsView';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="ListArticles">
-      <Stack.Screen name="ListArticles" component={ListArticlesView} />
-      <Stack.Screen name="Article" component={ArticleView} />
-      <Stack.Screen name="Commande" component={CommandeView} />
+    <Stack.Navigator initialRouteName="ListProjects">
+      <Stack.Screen name="ListProjects" component={ListProjectsView} />
+      <Stack.Screen name="Project" component={ProjectView} />
+      <Stack.Screen name="AddProject" component={AddProjectView} />
     </Stack.Navigator>
   );
 };
@@ -21,8 +21,8 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="ListArticle" component={StackNavigator} />
-      <Tab.Screen name="Commande" component={CommandeView} />
+      <Tab.Screen name="ListProject" component={StackNavigator} />
+      <Tab.Screen name="AddProject" component={AddProjectView} />
     </Tab.Navigator>
   );
 }

@@ -2,12 +2,12 @@ import React from 'react';
 import {TouchableOpacity, Image} from 'react-native';
 import {View, Text} from 'components';
 
-const ArticleView = props => {
+const ProjectView = props => {
   const {route, navigation} = props;
   const {params} = route;
   const {item} = params;
 
-  const data = {idUser: 3, idArticle: item.id};
+  const data = {idUser: 3, idProject: item.id};
 
   return (
     <View style={{marginTop: 50}}>
@@ -43,4 +43,4 @@ const ArticleView = props => {
   );
 };
 
-export default ArticleView;
+export default ProjectView;

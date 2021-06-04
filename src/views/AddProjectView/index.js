@@ -7,7 +7,7 @@ import {
   TextInput,
 } from 'react-native';
 
-const CommandeView = props => {
+const AddProjectView = props => {
   const [selectedId, setSelectedId] = useState(null);
   const [text, onChangeText] = React.useState();
   const [text2, onChangeText2] = React.useState();
@@ -17,26 +17,16 @@ const CommandeView = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch('http://192.168.1.51:8080/commandes')
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
-
-  console.log(data);
-
   const Item = ({item, onPress, backgroundColor, textColor}) =>
-    item.idArticle && (
+    item.idProject && (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('Article', {
+          navigation.navigate('Project', {
             item,
           })
         }>
         <View>
-          <Text>{item.idArticle}</Text>
+          <Text>{item.idProject}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -73,4 +63,4 @@ const CommandeView = props => {
   );
 };
 
-export default CommandeView;
+export default AddProjectView;

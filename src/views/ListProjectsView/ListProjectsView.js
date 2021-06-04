@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text} from 'components';
 import {FlatList, TouchableOpacity, ActivityIndicator} from 'react-native';
 
-const ListArticlesView = props => {
+const ListProjectsView = props => {
   const [selectedId, setSelectedId] = useState(null);
   const {navigation} = props;
   const [isLoading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ const ListArticlesView = props => {
   const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('Article', {
+        navigation.navigate('Project', {
           item,
         })
       }>
@@ -47,4 +47,4 @@ const ListArticlesView = props => {
   );
 };
 
-export default ListArticlesView;
+export default ListProjectsView;

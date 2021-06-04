@@ -1,5 +1,5 @@
-import ArticleView from './ArticleView';
-import ListArticlesView from './ListArticlesView';
-import CommandeView from './CommandeView';
+import ProjectView from './ProjectView';
+import ListProjectsView from './ListProjectsView';
+import AddProjectView from './AddProjectView';
 
-export {ArticleView, ListArticlesView, CommandeView};
+export {ProjectView, ListProjectsView, AddProjectView};
