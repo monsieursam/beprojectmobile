@@ -11,13 +11,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {useColorScheme} from 'react-native';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 import StackNavigator from 'routes/StackNavigator';
 import darkTheme from 'themes/dark';

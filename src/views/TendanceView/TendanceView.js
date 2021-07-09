@@ -1,9 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text} from 'components';
 import {useGetProjects} from 'hooks/projects';
-import {FlatList, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  StyleSheet,
+  Image,
+  TextInput,
+} from 'react-native';
 
-const ListProjectsView = props => {
+const TendanceView = props => {
   const [selectedId, setSelectedId] = useState(null);
   const {navigation} = props;
 
@@ -57,20 +64,54 @@ const ListProjectsView = props => {
     </TouchableOpacity>
   );
 
+  const [query, setQuery] = useState('');
+
+  const Header = () => {
+    return (
+      <View
+        style={{
+          backgroundColor: 'red',
+          padding: 10,
+          height: 60,
+          marginVertical: 10,
+          borderRadius: 20,
+        }}>
+        <TextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          clearButtonMode="always"
+          value={query}
+          onChangeText={queryText => setQuery(queryText)}
+          placeholder="Search"
+          style={{
+            backgroundColor: '#fff',
+            paddingHorizontal: 20,
+            height: '100%',
+          }}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={{flex: 1}}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList
-          data={data.projects}
-          renderItem={Item}
-          keyExtractor={item => item.id}
-          extraData={selectedId}
-        />
+        <View>
+          <Header />
+          <View style={{backgroundColor: 'green'}}>
+            <FlatList
+              data={data.projects}
+              renderItem={Item}
+              keyExtractor={item => item.id}
+              extraData={selectedId}
+            />
+          </View>
+        </View>
       )}
     </View>
   );
 };
 
-export default ListProjectsView;
+export default TendanceView;
