@@ -104,7 +104,6 @@
 				5A01BFBD56B829DF1D3D2BD2 /* Pods-beprojectmobilev6-beprojectmobilev6Tests.debug.xcconfig */,
 				74DF2C2D26C6F13C01001C49 /* Pods-beprojectmobilev6-beprojectmobilev6Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -160,7 +159,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				191604934AA12589F809665A /* [CP] Embed Pods Frameworks */,
 				726B23AF8761CF1565CBD117 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -183,7 +181,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				697B7CF930493E1EE4C3E344 /* [CP] Embed Pods Frameworks */,
 				D37F02ACCB422D5F5397745D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -264,40 +261,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
-		};
-		191604934AA12589F809665A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-beprojectmobilev6-beprojectmobilev6Tests/Pods-beprojectmobilev6-beprojectmobilev6Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-beprojectmobilev6-beprojectmobilev6Tests/Pods-beprojectmobilev6-beprojectmobilev6Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-beprojectmobilev6-beprojectmobilev6Tests/Pods-beprojectmobilev6-beprojectmobilev6Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		697B7CF930493E1EE4C3E344 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-beprojectmobilev6/Pods-beprojectmobilev6-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-beprojectmobilev6/Pods-beprojectmobilev6-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-beprojectmobilev6/Pods-beprojectmobilev6-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		726B23AF8761CF1565CBD117 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -485,6 +448,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z6ZFSWFBR2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = beprojectmobilev6/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +475,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z6ZFSWFBR2;
 				INFOPLIST_FILE = beprojectmobilev6/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

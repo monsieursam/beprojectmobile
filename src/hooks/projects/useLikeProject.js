@@ -1,11 +1,12 @@
 import API from 'api';
 import {useMutation, useQueryClient} from 'react-query';
 
-export default function useCreateProject() {
+export default function useLikeProject(slug) {
   const cache = useQueryClient();
 
   return useMutation(
-    values => API.post('/projects', values).then(res => res.data),
+    values =>
+      API.post(`/projects/${slug}/favorite`, values).then(res => res.data),
     {
       onSuccess: data => cache.refetchQueries(),
     },

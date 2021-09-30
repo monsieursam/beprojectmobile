@@ -1,15 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text} from 'components';
-import {useGetProjects} from 'hooks/projects';
-import {FlatList, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {useGetProjects, useInfiniteProjects} from 'hooks/projects';
+import {
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  Image,
+} from 'react-native';
 
 const ListProjectsView = props => {
   const [selectedId, setSelectedId] = useState(null);
   const {navigation} = props;
 
-  const {data, isLoading} = useGetProjects();
+  const {
+    status,
+    data,
+    isLoading,
+    error,
+    isFetching,
+    fetchNextPage,
+    isFetchingMore,
+    canFetchMore,
+    fetchMore,
+  } = useInfiniteProjects();
 
-  console.log(data);
+  let infiniteScrollArray = [];
+  data?.pages?.forEach(page => {
+    infiniteScrollArray = infiniteScrollArray.concat(page.results.data);
+  });
+
   const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity
       onPress={() =>
@@ -31,7 +50,14 @@ const ListProjectsView = props => {
               width: 50,
               height: 50,
               borderRadius: 5,
-            }}></View>
+            }}>
+            <Image
+              style={{width: '100%', height: '100%'}}
+              source={{
+                uri: 'https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg',
+              }}
+            />
+          </View>
           <Text>{item.author?.username}</Text>
         </View>
         <View style={{marginLeft: 10}}>
@@ -59,15 +85,32 @@ const ListProjectsView = props => {
 
   return (
     <View style={{flex: 1}}>
+      <View
+        style={{
+          display: 'flex',
+          marginTop: 60,
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: 25}}>Timeline</Text>
+      </View>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList
-          data={data.projects}
-          renderItem={Item}
-          keyExtractor={item => item.id}
-          extraData={selectedId}
-        />
+        data && (
+          <FlatList
+            data={infiniteScrollArray}
+            renderItem={Item}
+            keyExtractor={item => item.id}
+            extraData={selectedId}
+            onEndReachedThreshold={0.9}
+            onEndReached={() => {
+              console.log('reach the top');
+              fetchNextPage();
+            }}
+          />
+        )
       )}
     </View>
   );

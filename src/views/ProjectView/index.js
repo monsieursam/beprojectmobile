@@ -6,15 +6,16 @@ import {
   FlatList,
 } from 'react-native';
 import {View, Text} from 'components';
-import {useGetCommentsProject} from 'hooks/projects';
+import {useGetCommentsProject, useLikeProject} from 'hooks/projects';
 
 const ProjectView = props => {
   const {route, navigation} = props;
   const {params} = route;
   const {item} = params;
 
-  console.log(item.slug);
+  console.log(item);
   const {data, isLoading} = useGetCommentsProject(item.slug);
+  const {mutate: createLike, status} = useLikeProject();
 
   console.log(data);
   const ItemComments = ({item, onPress, backgroundColor, textColor}) => (
@@ -50,10 +51,20 @@ const ProjectView = props => {
 
   return (
     <View style={{flex: 1}}>
+      <View
+        style={{
+          display: 'flex',
+          marginTop: 60,
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: 25}}>Plus de detail sur le projet</Text>
+      </View>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <View style={{minHeight: 100}}>
+        <View style={{paddingTop: 20}}>
           <View
             style={{
               flexDirection: 'row',
@@ -63,11 +74,17 @@ const ProjectView = props => {
             <View
               style={{
                 margin: 10,
-                backgroundColor: 'red',
                 width: 50,
                 height: 50,
                 borderRadius: 5,
-              }}></View>
+              }}>
+              <Image
+                style={{width: '100%', height: '100%'}}
+                source={{
+                  uri: 'https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg',
+                }}
+              />
+            </View>
             <Text>{item.author?.username}</Text>
           </View>
           <View style={{marginLeft: 10}}>
@@ -75,29 +92,19 @@ const ProjectView = props => {
           </View>
           <View style={{margin: 10}}>
             <Text>Tags</Text>
-            {item.tagList.map(tag => (
+            {item.tags?.map(tag => (
               <View>
                 <Text>{tag}</Text>
               </View>
             ))}
           </View>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Project', {
-                item,
-              })
-            }>
-            <View
-              style={{
-                marginLeft: 10,
-                flexDirection: 'row',
-                alignItems: 'center',
-                width: '100%',
-              }}>
-              <Text>Ajouter à mes favoris</Text>
-            </View>
-          </TouchableOpacity>
-          <View>
+          <View style={{margin: 10}}>
+            <Text style={{fontSize: 20}}>
+              Ce projet vous intérese ? Contactez cette utilisateur par email
+            </Text>
+            <Text>{item.author?.email}</Text>
+          </View>
+          <View style={{height: 400}}>
             <View style={{margin: 10}}>
               <Text>Commentaires</Text>
             </View>

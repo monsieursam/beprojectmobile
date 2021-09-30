@@ -9,12 +9,13 @@ import {
   Image,
   TextInput,
 } from 'react-native';
+import useGetTags from '../../hooks/tags/useGetTags';
 
 const TendanceView = props => {
   const [selectedId, setSelectedId] = useState(null);
   const {navigation} = props;
 
-  const {data, isLoading} = useGetProjects();
+  const {data, isLoading} = useGetTags();
 
   console.log(data);
   const Item = ({item, onPress, backgroundColor, textColor}) => (
@@ -24,7 +25,7 @@ const TendanceView = props => {
           item,
         })
       }>
-      <View style={{minHeight: 100}}>
+      <View>
         <View
           style={{
             flexDirection: 'row',
@@ -34,32 +35,14 @@ const TendanceView = props => {
           <View
             style={{
               margin: 10,
-              backgroundColor: 'red',
-              width: 50,
-              height: 50,
+              width: 20,
               borderRadius: 5,
             }}></View>
-          <Text>{item.author?.username}</Text>
+          <Text style={{fontSize: 20}}>{item.tag}</Text>
         </View>
         <View style={{marginLeft: 10}}>
           <Text>{item.title}</Text>
         </View>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('Project', {
-              item,
-            })
-          }>
-          <View
-            style={{
-              marginLeft: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: '100%',
-            }}>
-            <Text>Ajouter à mes favoris</Text>
-          </View>
-        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -93,16 +76,28 @@ const TendanceView = props => {
     );
   };
 
+  console.log(data);
   return (
     <View style={{flex: 1}}>
+      <View
+        style={{
+          display: 'flex',
+          marginTop: 60,
+          marginBottom: 60,
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: 25}}>Tendance</Text>
+        <Text style={{fontSize: 20}}>Liste des tags les plus utilisés</Text>
+      </View>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <View>
-          <Header />
-          <View style={{backgroundColor: 'green'}}>
+          <View>
             <FlatList
-              data={data.projects}
+              data={data}
               renderItem={Item}
               keyExtractor={item => item.id}
               extraData={selectedId}

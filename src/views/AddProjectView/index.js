@@ -1,66 +1,70 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import {Button, TextInput} from 'react-native';
 import {View, Text} from 'components';
-import {
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  TextInput,
-} from 'react-native';
 
-const AddProjectView = props => {
-  const [selectedId, setSelectedId] = useState(null);
-  const [text, onChangeText] = React.useState();
-  const [text2, onChangeText2] = React.useState();
+import {useCreateUserLogin} from 'hooks/users';
+import {useCreateProject} from 'hooks/projects';
+import TagAdd from './TagAdd';
 
-  const [number, onChangeNumber] = React.useState(null);
-  const {navigation} = props;
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+const SignInView = props => {
+  const {route} = props;
+  const {params} = route;
+  // const {item} = params;
 
-  const Item = ({item, onPress, backgroundColor, textColor}) =>
-    item.idProject && (
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('Project', {
-            item,
-          })
-        }>
-        <View>
-          <Text>{item.idProject}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  const SignUp = ({item, onPress, backgroundColor, textColor}) => (
-    <View>
-      <TextInput
-        onChangeText={onChangeText}
-        value={text}
-        placeholder="username"
-        keyboardType="numeric"
-      />
-      <TextInput
-        onChangeText={onChangeText2}
-        value={text2}
-        keyboardType="password"
-      />
-    </View>
-  );
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [body, setBody] = useState('');
+  const [tags, setTags] = useState('');
+  const [searchArray, setItem] = useState([]);
+  const {mutate: createProject, status, data} = useCreateProject();
+
+  const clickOnCreateProject = () => {
+    const project = {project: {title, description, body, tags: searchArray}};
+    console.log('new projet');
+    console.log(project);
+    createProject(project);
+    setTitle('');
+    setDescription('');
+    setTags();
+  };
+
+  const addInputState = item => {
+    setItem([...searchArray, item]);
+  };
 
   return (
     <View style={{flex: 1}}>
-      {SignUp}
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          data={data}
-          renderItem={Item}
-          keyExtractor={item => item.id}
-          extraData={selectedId}
+      <View style={{padding: 50}}>
+        <Button title="Créé un projet" onPress={() => clickOnCreateProject()} />
+
+        <TextInput
+          style={{fontSize: 20}}
+          placeholder="Titre"
+          value={title}
+          onChangeText={setTitle}
         />
-      )}
+        <TextInput
+          style={{fontSize: 20}}
+          placeholder="description"
+          value={description}
+          onChangeText={setDescription}
+        />
+        <TextInput
+          style={{fontSize: 20}}
+          placeholder="body"
+          value={body}
+          onChangeText={setBody}
+        />
+        <TextInput
+          style={{fontSize: 20}}
+          placeholder="tags"
+          value={tags}
+          onChangeText={setTags}
+        />
+        <TagAdd addInputState={addInputState} />
+      </View>
     </View>
   );
 };
 
-export default AddProjectView;
+export default SignInView;
